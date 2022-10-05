@@ -23,7 +23,7 @@ export const authSlice = createSlice({
   reducers: {
     login: (state, { payload }) => {
       state.status = "authenticated";
-      state.id = payload.id;
+      state.id = payload.idUsuario;
       state.nombre = payload.nombre;
       state.fechaNacimiento = payload.fechaNacimiento || null;
       state.dni = payload.dni;
@@ -58,7 +58,18 @@ export const authSlice = createSlice({
       state.foto = null;
       state.errorMessage = payload?.message || null;
     },
+    updateDataUser: (state, { payload }) => {
+      state.nombre = payload.nombre;
+      state.fechaNacimiento = payload.fechaNacimiento || null;
+      state.apellidoPaterno = payload.apellidoPaterno;
+      state.apellidoMaterno = payload.apellidoMaterno;
+      state.direccion = payload.direcion || null;
+      state.contacto1 = payload.contacto1;
+      state.contacto2 = payload.contacto2 || null;
+      state.telefono = payload.telefono || null;
+      state.foto = payload.foto || null;
+    },
   },
 });
 
-export const { login, checkingCreditionals, logout } = authSlice.actions;
+export const { login, checkingCreditionals, logout, updateDataUser } = authSlice.actions;

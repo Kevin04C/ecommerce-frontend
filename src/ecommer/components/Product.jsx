@@ -12,10 +12,9 @@ export const Product = ({ product }) => {
       arr.reduce((data, byte) => data + String.fromCharCode(byte), "")
     );
   }
-  console.log(`data:image/png;base64,${toBase64(imagenProducto.data)}`);
 
   return (
-    <article className="w-full bg-white rounded-2xl shadow-sm p-3 cursor-pointer border hover:shadow-md hover:scale-[1.05] transition-all">
+    <article className="animate__animated animate__fadeIn animate__faster w-full bg-white rounded-2xl shadow-sm p-3 cursor-pointer border hover:shadow-md hover:scale-[1.05] transition-all">
       <picture>
         <img className="h-40 rounded-2xl mx-auto w-full aspect-auto object-contain" src={`data:image/png;base64,${toBase64(imagenProducto.data)}`} alt={nombreProducto}/>
       </picture>

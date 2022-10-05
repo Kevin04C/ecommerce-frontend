@@ -12,6 +12,7 @@ export const AppRouter = () => {
   const { status } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
+
   const isAuthenticated = status; //'checking','not-authenticated','authenticated'"
 
   useEffect(() => {

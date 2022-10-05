@@ -1,13 +1,16 @@
 export const registerUser = async (data) => {
   data.idRol = "1";
   try {
-    const result = await fetch("http://localhost:3000/api/auth/crearUsuario", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    const result = await fetch(
+      `${import.meta.env.VITE_API_ECOMMERCE}/auth/crearUsuario`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
 
     const dataUser = await result.json();
     return {
@@ -25,13 +28,16 @@ export const registerUser = async (data) => {
 
 export const loginUser = async (data) => {
   try {
-    const result = await fetch("http://localhost:3000/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    const result = await fetch(
+      `${import.meta.env.VITE_API_ECOMMERCE}/auth/login`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
     const dataUser = await result.json();
 
     return {
@@ -47,13 +53,42 @@ export const loginUser = async (data) => {
   }
 };
 
+export const updateUser = async (data, idUser) => {
+  try {
+    const result = await fetch(
+      `${import.meta.env.VITE_API_ECOMMERCE}/auth/actualizarUsuario/${idUser}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
+    const dataUser = await result.json();
+
+    return {
+      ok: true,
+      ...dataUser,
+    };
+  } catch (err) {
+    throw {
+      ok: false,
+      err,
+    };
+  }
+};
+
 export const generateNewToken = async (token) => {
   try {
-    const response = await fetch("http://localhost:3000/api/renew", {
-      headers: {
-        "x-token": token,
-      },
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_API_ECOMMERCE}/renew`,
+      {
+        headers: {
+          "x-token": token,
+        },
+      }
+    );
 
     const dataUser = await response.json();
     return {

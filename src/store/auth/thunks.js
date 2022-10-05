@@ -1,5 +1,5 @@
-import { loginUser, registerUser } from "../../auth/helpers";
-import { checkingCreditionals, login, logout } from "../auth/authSlice";
+import { loginUser, registerUser, updateUser } from "../../auth/helpers";
+import { checkingCreditionals, login, logout, updateDataUser } from "../auth/authSlice";
 
 export const startRegisterUser = (data) => {
   return async (dispatch) => {
@@ -23,5 +23,17 @@ export const startLoginUser = (data) => {
 
     dispatch(login(result));
     localStorage.setItem("token", result.token);
+  };
+};
+
+export const StartUpdateUser = (data) => {
+  return async (dispatch, getState) => {
+    const { id } = getState().auth;
+
+    const result = await updateUser(data, id);
+
+    if (!result.ok) throw result;
+
+    dispatch(updateDataUser(result));
   };
 };

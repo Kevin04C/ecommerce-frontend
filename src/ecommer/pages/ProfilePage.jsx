@@ -1,34 +1,21 @@
 import { Form, Formik } from "formik";
 import toast from "react-hot-toast";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../../auth/components/Button";
+import { StartUpdateUser } from "../../store/auth/thunks";
 import { InputForm } from "../components/InputForm";
 import { LayoutEcommerce } from "../layout/LayoutEcommerce";
 
-const examplePromise = (number) => {
-  return new Promise((resolve, reject) => {
-    if (number % 2 === 0) {
-      setTimeout(() => {
-        resolve();
-      }, 1500);
-    } else {
-      setTimeout(() => {
-        reject();
-      }, 1500);
-    }
-  });
-};
-
 export const ProfilePage = () => {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.auth);
 
   const handleUpdateUser = (values) => {
-    console.log(values);
     toast.promise(
-      examplePromise(4),
+      dispatch(StartUpdateUser(values)),
       {
         loading: "Cargando...",
-        success: <b>Guardado correctamente</b>,
+        success: <b>Datos actualizados correctamente</b>,
         error: <b>Hubo un error al guardar</b>,
       }
     );
