@@ -5,8 +5,11 @@ import { generateNewToken } from "../auth/helpers";
 import { AuthRouter } from "../auth/router/AuthRouter";
 import { CartPage } from "../ecommer/pages/CartPage";
 import { EcommerPage } from "../ecommer/pages/EcommerPage";
+import { ProductPage } from "../ecommer/pages/ProductPage";
 import { EcommerRouter } from "../ecommer/router/EcommerRouter";
 import { login, logout } from "../store/auth/authSlice";
+import { setCart, setProdroducts } from "../store/ecommer/ecommerceSlice";
+import { startLoadingProducts } from "../store/ecommer/thunks";
 
 export const AppRouter = () => {
   const { status } = useSelector((state) => state.auth);
@@ -26,12 +29,13 @@ export const AppRouter = () => {
 
       if (!result.ok) return dispatch(logout());
 
-      console.log(token)
       dispatch(login(result));
       localStorage.setItem("token", result.token);
     };
 
     checkAuthToken();
+    dispatch(startLoadingProducts());
+    dispatch(setCart(JSON.parse(localStorage.getItem("cart")) || []))
   }, []);
 
   return (
@@ -44,6 +48,8 @@ export const AppRouter = () => {
         }
         <Route path="/" element={<EcommerPage />}/>
         <Route path="/cart" element={<CartPage />}/>
+        <Route path="/product/:id" element={<ProductPage />}/>
+        
         <Route path="/*" element={<Navigate to="auth/login" />} />
       </Routes>
     </BrowserRouter>

@@ -23,10 +23,40 @@ export const ecommerceSlice = createSlice({
     },
     setProdroducts: (state, { payload }) => {
       state.isLoading = false;
-      state.products.push(...payload.products);
+      state.products = payload.products;
+    },
+    setCart: (state, { payload }) => {
+      state.cart = payload;
+    },
+    addProduct: (state, { payload }) => {
+      state.cart.push(payload);
+    },
+    incrementProduct: (state, { payload }) => {
+      const product = state.cart.find((p) => p.idProductos === payload);
+      product.cantidad++;
+    },
+    decrementProduct: (state, { payload }) => {
+      const product = state.cart.find((p) => p.idProductos === payload);
+      product.cantidad--;
+    },
+    deleteProduct: (state, { payload }) => {
+      state.cart = state.cart.filter((p) => p.idProductos !== payload);
+    },
+    clearCart: (state) => {
+      state.cart = [];
     },
   },
 });
 
-export const { startSaving, startLoading, setErrorMessage, setProdroducts } =
-  ecommerceSlice.actions;
+export const {
+  startSaving,
+  startLoading,
+  setErrorMessage,
+  setProdroducts,
+  setCart,
+  addProduct,
+  clearCart,
+  incrementProduct,
+  decrementProduct,
+  deleteProduct,
+} = ecommerceSlice.actions;

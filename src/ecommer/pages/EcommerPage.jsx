@@ -1,17 +1,16 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { startLoadingProducts } from "../../store/ecommer/thunks";
+import { useSelector } from "react-redux";
 import { ProductList } from "../components/ProductList";
 import { LayoutEcommerce } from "../layout/LayoutEcommerce";
 
 export const EcommerPage = () => {
-  const dispatch = useDispatch();
-  const { products = [] } = useSelector((state) => state.ecommerce);
+  const { cart } = useSelector((state) => state.ecommerce);
 
   useEffect(() => {
-    if (products.length > 0) return;
-    dispatch(startLoadingProducts());
-  }, []);
+    if (cart.length > 0) {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
+  }, [cart]);
 
   return (
     <LayoutEcommerce>
