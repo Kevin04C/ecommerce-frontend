@@ -21,21 +21,14 @@ export const Product = ({ product }) => {
   const { cart } = useSelector((state) => state.ecommerce);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  
   const handleAddCart = () => {
-    const product = {
-      cantidad: 1,
-      idProductos,
-      nombreProducto,
-      precioUnitario,
-      descripcion,
-      imagenProducto,
-    };
+    const productCart = {...product, cantidad: 1}
     const productExists = cart.find((p) => p.idProductos === idProductos);
     if (productExists) {
       dispatch(incrementProduct(idProductos));
     } else {
-      dispatch(addProduct(product));
+      dispatch(addProduct(productCart));
     }
     toast.success("Agregado al carrito");
   };

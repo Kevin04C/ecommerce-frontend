@@ -12,7 +12,6 @@ export const CartList = () => {
     dispatch(clearCart());
     localStorage.removeItem("cart");
   };
-    
 
   return (
     <>

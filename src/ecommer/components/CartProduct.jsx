@@ -1,4 +1,5 @@
 import React from "react";
+import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { decrementProduct, deleteProduct, incrementProduct } from "../../store/ecommer/ecommerceSlice";
 import { capitalize } from "../helpers/capitalize";
@@ -12,22 +13,26 @@ export const CartProduct = ({ product }) => {
     imagenProducto,
     cantidad,
     idProductos,
+    stock
   } = product;
 
   const dispatch = useDispatch();
 
   const handleIncrementProduct = () => {
+    if(cantidad >= stock){
+      return toast.error(<b>No se puede agregar más productos que la cantidad disponible</b>)
+    }
       dispatch(incrementProduct(idProductos));
   };
 
   const handleDecrementProduct = () => {
+    if(cantidad <= 1) return;
     dispatch(decrementProduct(idProductos))
   }
 
   const handleDeleteProduct = () => {
     dispatch(deleteProduct(idProductos))
   }
-
 
   return (
     <article className="bg-white p-3 rounded-md shadow mt-3 flex md:gap-5">
@@ -41,9 +46,10 @@ export const CartProduct = ({ product }) => {
       <div className="grow flex flex-col justify-between">
         <div>
           <h3 className="text-xl font-bold text-gray-700">
-            {capitalize(nombreProducto)}
+             {capitalize(nombreProducto)}
           </h3>
-          <p className="text-sm text-gray-500">{capitalize(descripcion)}</p>
+          <p className="text-sm text-gray-500 mb-1 ">{capitalize(descripcion)}</p>
+          <span className="text-xs rounded-md text-slate-700"><b>Stock:</b> {stock}</span>
         </div>
         <div className="mt-3 md:mt-0 flex items-center gap-5">
           <span className="font-extrabold text-gray-900 grow">

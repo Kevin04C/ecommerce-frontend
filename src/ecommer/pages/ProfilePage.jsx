@@ -2,33 +2,37 @@ import { Form, Formik } from "formik";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../../auth/components/Button";
+import { validationSchemeUpdateProfile } from "../../auth/formik/schema";
 import { StartUpdateUser } from "../../store/auth/thunks";
 import { InputForm } from "../components/InputForm";
 import { LayoutEcommerce } from "../layout/LayoutEcommerce";
+import { Error } from '../../auth/components/Error';
 
 export const ProfilePage = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth);
 
   const handleUpdateUser = (values) => {
-    toast.promise(
-      dispatch(StartUpdateUser(values)),
-      {
-        loading: "Cargando...",
-        success: <b>Datos actualizados correctamente</b>,
-        error: <b>Hubo un error al guardar</b>,
-      }
-    );
+    toast.promise(dispatch(StartUpdateUser(values)), {
+      loading: "Cargando...",
+      success: <b>Datos actualizados correctamente</b>,
+      error: <b>Hubo un error al guardar</b>,
+    });
   };
 
   return (
     <>
       <LayoutEcommerce>
-        <h3 className="text-xl md:text-3xl font-bold mb-3 text-gray-800">Mis datos personales</h3>
+        <h3 className="text-xl md:text-3xl font-bold mb-3 text-gray-800">
+          Mis datos personales
+        </h3>
         <hr />
 
-        <Formik initialValues={user} onSubmit={handleUpdateUser}>
-          {({ values }) => (
+        <Formik 
+          initialValues={user} onSubmit={handleUpdateUser}
+          validationSchema={validationSchemeUpdateProfile}
+        >
+          {({ values, errors }) => (
             <Form className="w-full bg-white px-4 py-5 rounded-lg shadow-sm mt-5">
               <div className="md:grid grid-cols-3 gap-x-4">
                 <div className="mb-3">
@@ -38,6 +42,7 @@ export const ProfilePage = () => {
                     valueInput={values.nombre}
                     labelText="Nombre"
                   />
+                  {errors.nombre && <Error message={errors.nombre}/>}
                 </div>
                 <div className="mb-3">
                   <InputForm

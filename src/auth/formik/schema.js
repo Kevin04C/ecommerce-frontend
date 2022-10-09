@@ -38,3 +38,7 @@ export const validationSchemeRegister = Yup.object({
     .min(6, "La contraseña debe tener un máximo de 6 caracteres")
     .required("La contraseña es requerida"),
 });
+
+export const validationSchemeUpdateProfile = Yup.object({
+  nombre: Yup.string().required("El nombre es requerido"),
+})
