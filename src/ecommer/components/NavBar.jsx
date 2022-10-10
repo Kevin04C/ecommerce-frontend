@@ -21,12 +21,12 @@ export const NavBar = () => {
   return (
     <>
       <nav className="bg-white border border-b shadow-sm py-4 px-3">
-        <div className="md:max-w-7xl mx-auto flex justify-between items-center relative">
+        <div className="md:max-w-7xl mx-auto md:flex-row flex flex-col justify-between items-center relative">
           <h2
-            className="text-2xl font-bold cursor-pointer"
+            className="text-xl md:text-2xl font-bold cursor-pointer mb-3 md:mb-0"
             onClick={handleClickHome}
           >
-            Logo
+            <span className="text-transparent bg-clip-text bg-gradient-to-tr from-red-900 to-red-500"> <i class="fa-solid fa-martini-glass"></i> LICOR</span> STORE
           </h2>
           <div className="flex gap-5 md:gap-8 ">
             {status === "authenticated" ? (
@@ -50,7 +50,7 @@ export const NavBar = () => {
             ) : (
               <>
                 <p
-                  className="text-gray-600 md:text-lg hover:text-black cursor-pointer transition-colors"
+                  className="text-gray-600  md:text-lg hover:text-black cursor-pointer transition-colors"
                   onClick={handleClickCart}
                 >
                   <i className="fa-solid fa-cart-shopping mr-3"></i>

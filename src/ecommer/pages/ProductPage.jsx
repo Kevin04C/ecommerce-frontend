@@ -59,7 +59,7 @@ export const ProductPage = () => {
           </span>
 
           <form 
-            className="md:flex gap-5 mt-8"
+            className="md:flex gap-5"
             onClick={haldleAddCart}
           >
             <select className="md:basis-[20%] w-full mb-3 p-3 text-center rounded outline-none border">
@@ -71,7 +71,7 @@ export const ProductPage = () => {
               <option value="6">6</option>
             </select>
             <button 
-              className="md:basis[80%] w-full bg-blue-500 text-xl rounded-md text-white p-3 hover:bg-blue-700 transition-all"
+              className="md:basis[80%] w-full bg-blue-500 text-xl rounded-md text-white hover:bg-blue-700 transition-all"
               type="submit"
             >
               AGREGAR AL CARRITO
