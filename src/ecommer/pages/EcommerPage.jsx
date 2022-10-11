@@ -25,7 +25,7 @@ export const EcommerPage = () => {
           className="bg-red-500 h-12"
           type="submit"
         >
-          <i class="fa-solid fa-beer-mug-empty text-white px-8"></i>
+          <i className="fa-solid fa-beer-mug-empty text-white px-8"></i>
         </button>
       </form>
 

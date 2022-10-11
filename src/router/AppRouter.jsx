@@ -8,13 +8,13 @@ import { EcommerPage } from "../ecommer/pages/EcommerPage";
 import { ProductPage } from "../ecommer/pages/ProductPage";
 import { EcommerRouter } from "../ecommer/router/EcommerRouter";
 import { login, logout } from "../store/auth/authSlice";
-import { setCart, setProdroducts } from "../store/ecommer/ecommerceSlice";
+import { setCart } from "../store/ecommer/ecommerceSlice";
 import { startLoadingProducts } from "../store/ecommer/thunks";
 
 export const AppRouter = () => {
   const { status } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
 
   const isAuthenticated = status; //'checking','not-authenticated','authenticated'"
 

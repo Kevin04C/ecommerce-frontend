@@ -8,7 +8,7 @@ export const LayoutEcommerce = ({ children, className }) => {
     <div className="bg-gray-100 min-h-screen">
       <NavBar />
       <main
-        className={`md:max-w-7xl mx-auto px-3 mt-8 min-h-[80vh] ${className}`}
+        className={`md:max-w-7xl mx-auto px-3 mt-8 min-h-[60vh] ${className}`}
       >
         {children}
         <picture className="fixed right-4 bottom-4  z-20">

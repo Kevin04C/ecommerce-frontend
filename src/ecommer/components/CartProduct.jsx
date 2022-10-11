@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { decrementProduct, deleteProduct, incrementProduct } from "../../store/ecommer/ecommerceSlice";
@@ -17,6 +17,8 @@ export const CartProduct = ({ product }) => {
   } = product;
 
   const dispatch = useDispatch();
+
+  const newDescripcion = useMemo(() => descripcion.length > 57  ? `${descripcion.slice(0,57)}...` : descripcion , [descripcion])
 
   const handleIncrementProduct = () => {
     if(cantidad >= stock){
@@ -48,8 +50,8 @@ export const CartProduct = ({ product }) => {
           <h3 className="text-xl font-bold text-gray-700">
              {capitalize(nombreProducto)}
           </h3>
-          <p className="text-sm text-gray-500 mb-1 ">{capitalize(descripcion)}</p>
-          <span className="text-xs rounded-md text-slate-700"><b>Stock:</b> {stock}</span>
+          <p className="text-sm text-gray-500 mb-1 ">{capitalize(newDescripcion)}</p>
+          <span className="text-xs rounded-md text-slate-700"><b className="text-red-500">Stock:</b> {stock}</span>
         </div>
         <div className="mt-3 md:mt-0 flex items-center gap-5">
           <span className="font-extrabold text-gray-900 grow">

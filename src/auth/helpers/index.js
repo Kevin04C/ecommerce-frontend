@@ -89,6 +89,7 @@ export const generateNewToken = async (token) => {
         },
       }
     );
+    if (!response.ok) throw response;
 
     const dataUser = await response.json();
     return {

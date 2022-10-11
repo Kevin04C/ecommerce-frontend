@@ -20,7 +20,7 @@ export const NavBar = () => {
 
   return (
     <>
-      <nav className="bg-white border border-b shadow-sm py-4 px-3">
+      <nav className="bg-white border border-b shadow-sm py-4 px-3 sticky left-0 top-0 z-20">
         <div className="md:max-w-7xl mx-auto md:flex-row flex flex-col justify-between items-center relative">
           <h2
             className="text-xl md:text-2xl font-bold cursor-pointer mb-3 md:mb-0"

@@ -33,7 +33,7 @@ export const ProfilePage = () => {
           validationSchema={validationSchemeUpdateProfile}
         >
           {({ values, errors }) => (
-            <Form className="w-full bg-white px-4 py-5 rounded-lg shadow-sm mt-5">
+            <Form className="w-full bg-white px-4 py-5 rounded-lg shadow-sm mt-5 mb-20">
               <div className="md:grid grid-cols-3 gap-x-4">
                 <div className="mb-3">
                   <InputForm

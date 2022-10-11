@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -21,6 +21,8 @@ export const Product = ({ product }) => {
   const { cart } = useSelector((state) => state.ecommerce);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const newDescripcion = useMemo(() => descripcion.length > 57  ? `${descripcion.slice(0,57)}...` : descripcion , [descripcion])
   
   const handleAddCart = () => {
     const productCart = {...product, cantidad: 1}
@@ -50,7 +52,7 @@ export const Product = ({ product }) => {
         <h4 className="mt-3 text-lg font-bold text-gray-700">
           {capitalize(nombreProducto)}
         </h4>
-        <p className="text-xs text-gray-400">{capitalize(descripcion)}</p>
+        <p className="text-xs md:text-sm  text-gray-400">{capitalize(newDescripcion)}</p>
 
         <div className="flex justify-between items-center mt-3">
           <span className="text-xl font-bold text-gray-800">
