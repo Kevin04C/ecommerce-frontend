@@ -4,6 +4,7 @@
   position: relative;
   margin: 2.5rem auto;
   grid-column: span 2;
+  transform: scale(1.4);
   animation: sk-chase 2.5s infinite linear both;
 }
 

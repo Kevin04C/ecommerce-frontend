@@ -37,7 +37,7 @@ export const Footer = () => {
               <li className="text-xl font-semibold mb-6">CONTÁCTANOS</li>
               <li className="text-sm text-gray-400 hover:underline cursor-pointer flex items-center justify-center gap-2 mb-2">
                 <span>
-                  <i class="fa-solid fa-headset"></i>
+                  <i className="fa-solid fa-headset"></i>
                 </span>
                 <p>
                   Atención telefónica: <br /> +51 999 999 999
@@ -45,7 +45,7 @@ export const Footer = () => {
               </li>
               <li className="text-sm text-gray-400 hover:underline cursor-pointer flex items-center justify-center gap-2 mb-2">
                 <span>
-                  <i class="fa-regular fa-clock"></i>
+                  <i className="fa-regular fa-clock"></i>
                 </span>
                 <p className="w-2/4">
                   De Lunes a Sábado en el horario de 08:00hs a 18:00hs y

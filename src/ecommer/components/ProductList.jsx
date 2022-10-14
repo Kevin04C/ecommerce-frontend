@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Product } from "./Product";
+import { Spinner } from '../../auth/components/Spinner';
 
 export const ProductList = () => {
   const { isLoading, products = [] } = useSelector((state) => state.ecommerce);
@@ -11,7 +12,10 @@ export const ProductList = () => {
       </h2>
 
       {isLoading ? (
-        <p>Cargando productos...</p>
+        <div>
+          <Spinner />
+          <p className="text-center font-bold text-sm text-slate-600">Un momento, estamos cargando los productos</p>
+        </div>
       ) : (
         <section className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
           {products.map((product) => (

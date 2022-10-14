@@ -24,7 +24,7 @@ export const RegisterPage = () => {
   };
 
   return (
-    <AuthLayout className="my-8 md:my-0" containerAuthClass="md:-mt-12">
+    <AuthLayout className="my-8 md:my-0" containerAuthclassName="md:-mt-12">
       <div>
         <h2 className="text-3xl font-semibold my-3 mb-6">Registro</h2>
 

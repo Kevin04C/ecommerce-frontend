@@ -19,7 +19,7 @@ export const LoginPage = () => {
   };
 
   return (
-    <AuthLayout containerAuthClass="-mt-10">
+    <AuthLayout containerAuthclassName="-mt-10">
       <h2 className="text-3xl font-semibold my-3">Iniciar sesión</h2>
       <Formik
         onSubmit={handleSubmit}

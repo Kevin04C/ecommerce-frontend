@@ -14,15 +14,13 @@ export const CartList = () => {
   };
 
   return (
-    <>
+    <section className="w-full">
       <h2 className="text-5xl font-black text-center">Mi carrito</h2>
       {cart.length === 0 ? (
-        <>
           <p className="text-center font-bold text-xl md:text-2xl md:w-2/4 mx-auto text-gray-800 mt-5">
             <i className="fa-solid fa-circle-exclamation mr-2"></i>
             Tu carrito aún esta vacio empieza a agregar productos
           </p>
-        </>
       ) : (
         <div className="flex flex-col-reverse md:flex-row mt-6 md:mt-12 gap-8">
           <div className="basis-7/12">
@@ -44,6 +42,6 @@ export const CartList = () => {
           </div>
         </div>
       )}
-    </>
+    </section>
   );
 };

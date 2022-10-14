@@ -14,7 +14,7 @@ export const CartPage = () => {
 
   return (
     <LayoutEcommerce className="pb-12">
-      <CartList />
+        <CartList />
     </LayoutEcommerce>
   );
 };
