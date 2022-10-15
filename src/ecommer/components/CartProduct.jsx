@@ -1,9 +1,17 @@
 import React, { useMemo } from "react";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
-import { decrementProduct, deleteProduct, incrementProduct } from "../../store/ecommer/ecommerceSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  decrementProduct,
+  deleteProduct,
+  finishSaving,
+  incrementProduct,
+  startSaving,
+} from "../../store/ecommer/ecommerceSlice";
 import { capitalize } from "../helpers/capitalize";
 import { formatMoney } from "../helpers/fomartMoney";
+import { deleteProductCart, updateProductCart } from "../helpers/helpersEcommerce";
+import { SavingSpinner } from "./SavingSpinner";
 
 export const CartProduct = ({ product }) => {
   const {
@@ -11,30 +19,45 @@ export const CartProduct = ({ product }) => {
     descripcion,
     precioUnitario,
     imagenProducto,
-    cantidad,
+    cantidadCarrito: cantidad,
     idProductos,
-    stock
+    stock,
+    idCarrito,
   } = product;
 
+  const { isSaving } = useSelector((state) => state.ecommerce);
   const dispatch = useDispatch();
 
-  const newDescripcion = useMemo(() => descripcion.length > 57  ? `${descripcion.slice(0,57)}...` : descripcion , [descripcion])
+  const newDescripcion = useMemo(() => descripcion.length > 57 ? `${descripcion.slice(0, 57)}...` :descripcion[descripcion]);
 
-  const handleIncrementProduct = () => {
-    if(cantidad >= stock){
-      return toast.error(<b>No se puede agregar más productos que la cantidad disponible</b>)
-    }
-      dispatch(incrementProduct(idProductos));
+  const handleIncrementProduct = async () => {
+    const id = toast.loading("Un momento...")
+    dispatch(startSaving());
+    
+    const res = await updateProductCart(idCarrito, {product: idProductos, quantity: 1});
+    dispatch(finishSaving());
+    toast.dismiss(id);
+    
+    if(!res.ok) return toast.error(res.message);
+    dispatch(incrementProduct(idProductos));
+    toast.success(res.message);
   };
 
   const handleDecrementProduct = () => {
-    if(cantidad <= 1) return;
-    dispatch(decrementProduct(idProductos))
-  }
+    if (cantidad <= 1) return;
+    dispatch(decrementProduct(idProductos));
+  };
 
-  const handleDeleteProduct = () => {
-    dispatch(deleteProduct(idProductos))
-  }
+  const handleDeleteProduct = async () => {
+    dispatch(startSaving());
+
+    const res = await deleteProductCart(idCarrito);
+    dispatch(finishSaving());
+    
+    if (!res.ok) return toast.error("Hubo un error");
+    dispatch(deleteProduct(idProductos));
+    toast.success(res.message);
+  };
 
   return (
     <article className="bg-white p-3 rounded-md shadow mt-3 flex md:gap-5">
@@ -48,35 +71,46 @@ export const CartProduct = ({ product }) => {
       <div className="grow flex flex-col justify-between">
         <div>
           <h3 className="text-xl font-bold text-gray-700">
-             {capitalize(nombreProducto)}
+            {capitalize(nombreProducto)}
           </h3>
-          <p className="text-sm text-gray-500 mb-1 ">{capitalize(newDescripcion)}</p>
-          <span className="text-xs rounded-md text-slate-700"><b className="text-red-500">Stock:</b> {stock}</span>
+          <p className="text-sm text-gray-500 mb-1 ">
+            {capitalize(newDescripcion)}
+          </p>
+          <span className="text-xs rounded-md text-slate-700">
+            <b className="text-red-500">Stock:</b> {stock}
+          </span>
         </div>
-        <div className="mt-3 md:mt-0 flex items-center gap-5">
+        <div className="mt-3 md:mt-0 flex items-center justify-center gap-5">
           <span className="font-extrabold text-gray-900 grow">
             {formatMoney(precioUnitario)}
           </span>
 
-          <p className="flex gap-2 font-bold grow">
+          <div className="flex gap-2 items-center font-bold grow">
             <button
-              className="border leading-2 px-2 rounded- font-normal"
+              className="border leading-2 px-2 rounded font-normal"
               onClick={handleIncrementProduct}
+              disabled={isSaving}
             >
               +
             </button>
             {cantidad}
-            <button 
-              className="border leading-2 px-2 rounded- font-normal"
-              onClick={handleDecrementProduct}  
+            <button
+              className="border leading-2 px-2 rounded font-normal"
+              onClick={handleDecrementProduct}
+              disabled={isSaving}
             >
               -
             </button>
-          </p>
-          <i 
-            className="fa-solid fa-trash text-red-500 cursor-pointer hover:text-red-600 transition-all grow"
-            onClick={handleDeleteProduct}
-          ></i>
+            <button 
+              className="block mx-auto"
+              disabled={isSaving}
+              >
+              <i
+                className="fa-solid fa-trash text-red-500 cursor-pointer hover:text-red-600 transition-all grow text-center"
+                onClick={handleDeleteProduct}
+              ></i>
+            </button>
+          </div>
         </div>
       </div>
     </article>

@@ -4,10 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { formatMoney } from "../helpers/fomartMoney";
 import { generateIGV, generateTotal } from "../helpers/operationsCart";
 
-export const DetailsOrder = () => {
+export const DetailsOrder = ({cart}) => {
 
   const { nombre } = useSelector(state => state.auth);
-  const { cart } = useSelector(state => state.ecommerce);
   const navigate = useNavigate();
 
   const totalPriceOrder = useMemo(() => generateTotal(cart), [cart]);

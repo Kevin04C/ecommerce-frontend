@@ -1,5 +1,5 @@
 export const generateTotal = (cart = []) => {
-  return cart.reduce((prev, curr) => prev + Number(curr.precioUnitario * curr.cantidad), 0);
+  return cart.reduce((prev, curr) => prev + Number(curr.precioUnitario * curr.cantidadCarrito), 0);
 };
 
 export const generateIGV = (total) => {

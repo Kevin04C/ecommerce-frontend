@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Options } from "./Options";
 
 export const NavBar = () => {
-  const { status } = useSelector((state) => state.auth);
+  const { status,id } = useSelector((state) => state.auth);
   const [showOptions, setShowOptions] = useState(false);
   const { nombre } = useSelector((state) => state.auth);
 
@@ -15,7 +15,7 @@ export const NavBar = () => {
   };
 
   const handleClickHome = () => navigate("/");
-  const handleClickCart = () => navigate("/cart");
+  const handleClickCart = () => id ? navigate("/cart") : navigate("/auth/login");
   const handleLogin = () => navigate("/auth/login");
 
   return (

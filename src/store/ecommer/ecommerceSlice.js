@@ -32,6 +32,7 @@ export const ecommerceSlice = createSlice({
       state.cart.push(payload);
     },
     incrementProduct: (state, { payload }) => {
+      console.log(payload);
       const product = state.cart.find((p) => p.idProductos === payload);
       product.cantidad++;
     },
@@ -49,6 +50,9 @@ export const ecommerceSlice = createSlice({
     clearCart: (state) => {
       state.cart = [];
     },
+    finishSaving: (state) => {
+      state.isSaving = false;
+    }
   },
 });
 
@@ -63,5 +67,6 @@ export const {
   incrementProduct,
   decrementProduct,
   deleteProduct,
-  incrementProductByQuantity
+  incrementProductByQuantity,
+  finishSaving
 } = ecommerceSlice.actions;

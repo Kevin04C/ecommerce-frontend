@@ -7,6 +7,9 @@ import { capitalize } from "../helpers/capitalize";
 import { useEffect, useRef, useState } from "react";
 import { getProduct, setProductCart } from "../helpers/helpersEcommerce";
 import { Spinner } from "../../auth/components/Spinner";
+import toast from "react-hot-toast";
+import { SavingSpinner } from "../components/SavingSpinner";
+import { finishSaving, startSaving } from "../../store/ecommer/ecommerceSlice";
 
 export const ProductPage = () => {
   const [product, setProduct] = useState({
@@ -23,21 +26,29 @@ export const ProductPage = () => {
     nombreCategoria,
     nombreMarca,
   } = data || {};
-
+  const dispatch = useDispatch();
   const { id } = useParams();
   const { id: idUsuario } = useSelector((state) => state.auth);
+  const { isSaving } = useSelector((state) => state.ecommerce);
   const selectRef = useRef();
 
   const haldleAddCart = async (e) => {
     e.preventDefault();
     const quantity = Number(selectRef.current.value);
-
+    dispatch(startSaving());
+    
     const res = await setProductCart({
       idProductos: id,
       idUsuario: idUsuario,
       cantidadCarrito: quantity,
     });
-
+    
+    if(!res.ok) {
+      dispatch(finishSaving());
+      return toast.error(res?.message || "Hubo un error")
+    }
+    toast.success(res.message);
+    dispatch(finishSaving());
   };
 
   useEffect(() => {
@@ -124,9 +135,17 @@ export const ProductPage = () => {
             </div>
 
             <form className="mt-5" onClick={haldleAddCart}>
-              <Button className="md:w-2/4 w-full mx-auto">
-                Agregar al carrito
-              </Button>
+               <button 
+                type="submit"
+                className={`bg-blue-500 rounded text-white px-5 py-2 shadow-sm font-bold w-2/4 mx-auto mt-2 ${isSaving && 'grayscale'} `}
+                disabled={isSaving}
+              >
+                {
+                  isSaving 
+                  ? <SavingSpinner />
+                  : "Agregar al carrito"
+                }
+               </button>
             </form>
           </div>
         </section>

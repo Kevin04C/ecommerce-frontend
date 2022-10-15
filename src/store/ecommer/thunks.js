@@ -1,4 +1,4 @@
-import { getProducts } from "../../ecommer/helpers/helpersEcommerce";
+import { getCartUser, getProducts } from "../../ecommer/helpers/helpersEcommerce";
 import { setProdroducts, startLoading } from "./ecommerceSlice";
 
 export const startLoadingProducts = () => {

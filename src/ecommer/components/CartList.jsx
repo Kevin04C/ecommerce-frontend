@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "../../store/ecommer/ecommerceSlice";
 import { CartProduct } from "./CartProduct";
@@ -6,12 +6,13 @@ import { DetailsOrder } from "./DetailsOrder";
 
 export const CartList = () => {
   const dispatch = useDispatch();
-  const { cart } = useSelector((state) => state.ecommerce);
+  const { cart } = useSelector(state => state.ecommerce);
 
   const handleDeleteCart = () => {
     dispatch(clearCart());
     localStorage.removeItem("cart");
   };
+
 
   return (
     <section className="w-full">
@@ -38,7 +39,7 @@ export const CartList = () => {
             </div>
           </div>
           <div className="basis-5/12 mt-5 md:mt-0">
-            <DetailsOrder />
+            <DetailsOrder cart={cart}/>
           </div>
         </div>
       )}
