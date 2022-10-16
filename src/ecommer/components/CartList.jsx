@@ -1,24 +1,28 @@
-import React, { useEffect } from "react";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "../../store/ecommer/ecommerceSlice";
+import { deleteCart } from "../helpers/helpersEcommerce";
 import { CartProduct } from "./CartProduct";
 import { DetailsOrder } from "./DetailsOrder";
 
 export const CartList = () => {
   const dispatch = useDispatch();
   const { cart } = useSelector(state => state.ecommerce);
+  const { id } = useSelector(state => state.auth);
 
-  const handleDeleteCart = () => {
+  const handleDeleteCart = async () => {
+    
+    const res = await deleteCart(id);
+    console.log(res);
+
+    if(!res.ok) return toast.error("Hubo un erro");
+
     dispatch(clearCart());
     localStorage.removeItem("cart");
+    toast.success(res.message);
+
   };
-
-  useEffect(() => {
-    console.log("cart ha cambiado");
-  }, [cart])
   
-
-
   return (
     <section className="w-full">
       <h2 className="text-5xl font-black text-center">Mi carrito</h2>
