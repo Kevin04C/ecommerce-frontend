@@ -32,17 +32,16 @@ export const ecommerceSlice = createSlice({
       state.cart.push(payload);
     },
     incrementProduct: (state, { payload }) => {
-      console.log(payload);
       const product = state.cart.find((p) => p.idProductos === payload);
-      product.cantidad++;
+      product.cantidadCarrito++;
     },
     incrementProductByQuantity: (state, { payload }) => {
       const product = state.cart.find((p) => p.idProductos === payload.id);
-      product.cantidad += Number(payload.quantity);
+      product.cantidadCarrito += Number(payload.quantity);
     },
     decrementProduct: (state, { payload }) => {
       const product = state.cart.find((p) => p.idProductos === payload);
-      product.cantidad--;
+      product.cantidadCarrito--;
     },
     deleteProduct: (state, { payload }) => {
       state.cart = state.cart.filter((p) => p.idProductos !== payload);

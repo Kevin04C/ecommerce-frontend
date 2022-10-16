@@ -6,11 +6,12 @@ import {
   deleteProduct,
   finishSaving,
   incrementProduct,
+  startLoading,
   startSaving,
 } from "../../store/ecommer/ecommerceSlice";
 import { capitalize } from "../helpers/capitalize";
 import { formatMoney } from "../helpers/fomartMoney";
-import { deleteProductCart, updateProductCart } from "../helpers/helpersEcommerce";
+import { deleteProductCart, updateDecrementProductCart, updateProductCart } from "../helpers/helpersEcommerce";
 import { SavingSpinner } from "./SavingSpinner";
 
 export const CartProduct = ({ product }) => {
@@ -19,16 +20,17 @@ export const CartProduct = ({ product }) => {
     descripcion,
     precioUnitario,
     imagenProducto,
-    cantidadCarrito: cantidad,
+    cantidadCarrito,
     idProductos,
     stock,
     idCarrito,
   } = product;
 
+
   const { isSaving } = useSelector((state) => state.ecommerce);
   const dispatch = useDispatch();
 
-  const newDescripcion = useMemo(() => descripcion.length > 57 ? `${descripcion.slice(0, 57)}...` :descripcion[descripcion]);
+  const newDescripcion = useMemo(() => descripcion.length > 57 ? `${descripcion.slice(0, 57)}...`:descripcion, [descripcion]);
 
   const handleIncrementProduct = async () => {
     const id = toast.loading("Un momento...")
@@ -39,13 +41,22 @@ export const CartProduct = ({ product }) => {
     toast.dismiss(id);
     
     if(!res.ok) return toast.error(res.message);
-    dispatch(incrementProduct(idProductos));
     toast.success(res.message);
+    dispatch(incrementProduct(idProductos))
   };
 
-  const handleDecrementProduct = () => {
-    if (cantidad <= 1) return;
+  const handleDecrementProduct = async () => {
+    if (cantidadCarrito <= 1) return;
+    const id = toast.loading("Un momento...");
+    dispatch(startSaving())
+
+    const res = await updateDecrementProductCart(idCarrito, {quantity: cantidadCarrito - 1});
+    dispatch(finishSaving());
+    toast.dismiss(id);
+
+    if(!res.ok) return toast.error(err.mesage || "Hubo un error");
     dispatch(decrementProduct(idProductos));
+    toast.success(res.message);
   };
 
   const handleDeleteProduct = async () => {
@@ -93,7 +104,7 @@ export const CartProduct = ({ product }) => {
             >
               +
             </button>
-            {cantidad}
+            {cantidadCarrito}
             <button
               className="border leading-2 px-2 rounded font-normal"
               onClick={handleDecrementProduct}

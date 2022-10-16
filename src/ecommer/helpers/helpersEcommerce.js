@@ -115,3 +115,21 @@ export const updateProductCart = async (id,data) => {
     }
   }
 }
+
+export const updateDecrementProductCart = async (id, data) => {
+  try {
+    const response = await fetch(`${import.meta.env.VITE_API_ECOMMERCE}/carrito/decrementar/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+    const json = await response.json();
+    return json;
+  } catch (err) {
+    return {
+      ok: false
+    }
+  }
+}

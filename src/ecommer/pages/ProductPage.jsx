@@ -26,6 +26,7 @@ export const ProductPage = () => {
     nombreCategoria,
     nombreMarca,
   } = data || {};
+
   const dispatch = useDispatch();
   const { id } = useParams();
   const { id: idUsuario } = useSelector((state) => state.auth);

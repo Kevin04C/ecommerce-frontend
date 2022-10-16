@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "../../store/ecommer/ecommerceSlice";
 import { CartProduct } from "./CartProduct";
@@ -12,6 +12,11 @@ export const CartList = () => {
     dispatch(clearCart());
     localStorage.removeItem("cart");
   };
+
+  useEffect(() => {
+    console.log("cart ha cambiado");
+  }, [cart])
+  
 
 
   return (
