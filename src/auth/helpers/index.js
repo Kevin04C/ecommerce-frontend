@@ -97,9 +97,9 @@ export const generateNewToken = async (token) => {
       ...dataUser,
     };
   } catch (error) {
-    console.log(error);
     return {
       ok: false,
+      ...error,
     };
   }
 };

@@ -6,6 +6,7 @@ import { AuthRouter } from "../auth/router/AuthRouter";
 import { CartPage } from "../ecommer/pages/CartPage";
 import { EcommerPage } from "../ecommer/pages/EcommerPage";
 import { ProductPage } from "../ecommer/pages/ProductPage";
+import { Success } from "../ecommer/pages/Success";
 import { EcommerRouter } from "../ecommer/router/EcommerRouter";
 import { login, logout } from "../store/auth/authSlice";
 import { setCart } from "../store/ecommer/ecommerceSlice";
@@ -26,6 +27,7 @@ export const AppRouter = () => {
       }
 
       const result = await generateNewToken(token);
+      console.log(result);
 
       if (!result.ok) return dispatch(logout());
 
@@ -35,7 +37,7 @@ export const AppRouter = () => {
 
     checkAuthToken();
     dispatch(startLoadingProducts());
-    dispatch(setCart(JSON.parse(localStorage.getItem("cart")) || []))
+    dispatch(setCart(JSON.parse(localStorage.getItem("cart")) || []));
   }, []);
 
   return (
@@ -43,13 +45,14 @@ export const AppRouter = () => {
       <Routes>
         {
           isAuthenticated === "authenticated" 
-          ? <Route path="/*" element={<EcommerRouter />} />
-          :<Route path="/auth/*" element={<AuthRouter />} />
+            ? <Route path="/*" element={<EcommerRouter />} />
+            : <Route path="/auth/*" element={<AuthRouter />} />
         }
-        <Route path="/" element={<EcommerPage />}/>
-        <Route path="/cart" element={<CartPage />}/>
-        <Route path="/product/:id" element={<ProductPage />}/>
         
+        <Route path="/" element={<EcommerPage />} />
+        <Route path="/product/:id" element={<ProductPage />} />
+        <Route path="/success" element={<Success />} />
+
         <Route path="/*" element={<Navigate to="auth/login" />} />
       </Routes>
     </BrowserRouter>

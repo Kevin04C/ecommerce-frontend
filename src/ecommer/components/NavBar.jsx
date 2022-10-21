@@ -15,7 +15,7 @@ export const NavBar = () => {
   };
 
   const handleClickHome = () => navigate("/");
-  const handleClickCart = () => id ? navigate("/cart") : navigate("/auth/login");
+  const handleClickCart = () => navigate("/cart");
   const handleLogin = () => navigate("/auth/login");
 
   return (

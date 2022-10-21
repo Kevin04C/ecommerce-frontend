@@ -162,3 +162,23 @@ export const deleteCart = async (id) => {
     };
   }
 };
+
+export const paymentCart = async (idUser) => {
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_ECOMMERCE}/payment/${idUser},`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return await response.json();
+  } catch (error) {
+    console.log(error);
+    return {
+      ok: false,
+    };
+  }
+};
