@@ -82,7 +82,7 @@ export const updateUser = async (data, idUser) => {
 export const generateNewToken = async (token) => {
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_API_ECOMMERCE}/renew`,
+      `${import.meta.env.VITE_API_ECOMMERCE}/api/renew`,
       {
         headers: {
           "x-token": token,
