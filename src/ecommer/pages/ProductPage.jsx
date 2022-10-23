@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { formatMoney } from "../helpers/fomartMoney";
 import { LayoutEcommerce } from "../layout/LayoutEcommerce";
 import { Button } from "../../auth/components/Button";
@@ -28,6 +28,7 @@ export const ProductPage = () => {
   } = data || {};
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { id } = useParams();
   const { id: idUsuario } = useSelector((state) => state.auth);
   const { isSaving } = useSelector((state) => state.ecommerce);
@@ -35,6 +36,8 @@ export const ProductPage = () => {
 
   const haldleAddCart = async (e) => {
     e.preventDefault();
+    if(!idUsuario) return navigate("/auth/login");
+
     const quantity = Number(selectRef.current.value);
     dispatch(startSaving());
     
