@@ -84,6 +84,7 @@ export const generateNewToken = async (token) => {
     const response = await fetch(
       `${import.meta.env.VITE_API_ECOMMERCE}/api/renew`,
       {
+        method: "POST",
         headers: {
           "x-token": token,
         },
