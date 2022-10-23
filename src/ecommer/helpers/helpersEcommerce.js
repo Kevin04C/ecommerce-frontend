@@ -1,7 +1,7 @@
 export const getProducts = async () => {
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_API_ECOMMERCE}/ecommerce/products`
+      `${import.meta.env.VITE_API_ECOMMERCE}/api/ecommerce/products`
     );
     const products = await response.json();
     return {
@@ -18,7 +18,7 @@ export const getProducts = async () => {
 export const getProduct = async (id) => {
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_API_ECOMMERCE}/ecommerce/product/${id}`
+      `${import.meta.env.VITE_API_ECOMMERCE}/api/ecommerce/product/${id}`
     );
 
     const product = await response.json();
@@ -41,7 +41,7 @@ export const getProduct = async (id) => {
 export const setProductCart = async (data) => {
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_API_ECOMMERCE}/carrito/`,
+      `${import.meta.env.VITE_API_ECOMMERCE}/api/carrito/`,
       {
         method: "POST",
         headers: {
@@ -66,7 +66,7 @@ export const setProductCart = async (data) => {
 export const getCartUser = async (id) => {
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_API_ECOMMERCE}/carrito/${id}`
+      `${import.meta.env.VITE_API_ECOMMERCE}/api/carrito/${id}`
     );
     const json = await response.json();
 
@@ -84,7 +84,7 @@ export const getCartUser = async (id) => {
 export const deleteProductCart = async (id) => {
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_API_ECOMMERCE}/carrito/producto/${id}`,
+      `${import.meta.env.VITE_API_ECOMMERCE}/api/carrito/producto/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -104,7 +104,7 @@ export const deleteProductCart = async (id) => {
 export const updateProductCart = async (id, data) => {
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_API_ECOMMERCE}/carrito/${id}`,
+      `${import.meta.env.VITE_API_ECOMMERCE}/api/carrito/${id}`,
       {
         method: "PUT",
         headers: {
@@ -125,7 +125,7 @@ export const updateProductCart = async (id, data) => {
 export const updateDecrementProductCart = async (id, data) => {
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_API_ECOMMERCE}/carrito/decrementar/${id}`,
+      `${import.meta.env.VITE_API_ECOMMERCE}/api/carrito/decrementar/${id}`,
       {
         method: "PUT",
         headers: {
@@ -146,7 +146,7 @@ export const updateDecrementProductCart = async (id, data) => {
 export const deleteCart = async (id) => {
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_API_ECOMMERCE}/carrito/${id}`,
+      `${import.meta.env.VITE_API_ECOMMERCE}/api/carrito/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -166,7 +166,7 @@ export const deleteCart = async (id) => {
 export const paymentCart = async (idUser) => {
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_API_ECOMMERCE}/payment/${idUser},`,
+      `${import.meta.env.VITE_API_ECOMMERCE}/api/payment/${idUser},`,
       {
         method: "POST",
         headers: {

@@ -2,7 +2,7 @@ export const registerUser = async (data) => {
   data.idRol = "1";
   try {
     const result = await fetch(
-      `${import.meta.env.VITE_API_ECOMMERCE}/auth/crearUsuario`,
+      `${import.meta.env.VITE_API_ECOMMERCE}/api/auth/crearUsuario`,
       {
         method: "POST",
         headers: {
@@ -29,7 +29,7 @@ export const registerUser = async (data) => {
 export const loginUser = async (data) => {
   try {
     const result = await fetch(
-      `${import.meta.env.VITE_API_ECOMMERCE}/auth/login`,
+      `${import.meta.env.VITE_API_ECOMMERCE}/api/auth/login`,
       {
         method: "POST",
         headers: {
@@ -56,7 +56,7 @@ export const loginUser = async (data) => {
 export const updateUser = async (data, idUser) => {
   try {
     const result = await fetch(
-      `${import.meta.env.VITE_API_ECOMMERCE}/auth/actualizarUsuario/${idUser}`,
+      `${import.meta.env.VITE_API_ECOMMERCE}/api/auth/actualizarUsuario/${idUser}`,
       {
         method: "PUT",
         headers: {
