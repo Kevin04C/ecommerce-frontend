@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { Spinner } from "../../auth/components/Spinner";
 import { generateTotal } from "../helpers/operationsCart";
 import { buy, deleteCart } from "../helpers/helpersEcommerce";
+import toast from "react-hot-toast";
 
 export const SuccessPage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -30,7 +31,7 @@ export const SuccessPage = () => {
     const generatePucharse = async () => {
       const res = await buy(id, { products, totalVenta: generateTotal(cart) });
       setIsLoading(false);
-      if (!res.ok) return;
+      if (!res.ok) return  toast.error("Error al realizar la compra");
       deleteCart(id);
     };
     generatePucharse();
