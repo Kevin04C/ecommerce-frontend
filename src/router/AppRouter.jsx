@@ -3,10 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { generateNewToken } from "../auth/helpers";
 import { AuthRouter } from "../auth/router/AuthRouter";
-import { CartPage } from "../ecommer/pages/CartPage";
 import { EcommerPage } from "../ecommer/pages/EcommerPage";
 import { ProductPage } from "../ecommer/pages/ProductPage";
-import { Success } from "../ecommer/pages/Success";
+import { SuccessPage } from "../ecommer/pages/SuccessPage";
 import { EcommerRouter } from "../ecommer/router/EcommerRouter";
 import { login, logout } from "../store/auth/authSlice";
 import { setCart } from "../store/ecommer/ecommerceSlice";
@@ -25,9 +24,7 @@ export const AppRouter = () => {
       if (!token || token === undefined) {
         return dispatch(logout());
       }
-
       const result = await generateNewToken(token);
-      console.log(result);
 
       if (!result.ok) return dispatch(logout());
 
@@ -51,7 +48,7 @@ export const AppRouter = () => {
         
         <Route path="/" element={<EcommerPage />} />
         <Route path="/product/:id" element={<ProductPage />} />
-        <Route path="/success" element={<Success />} />
+        <Route path="/success" element={<SuccessPage />} />
 
         <Route path="/*" element={<Navigate to="auth/login" />} />
       </Routes>

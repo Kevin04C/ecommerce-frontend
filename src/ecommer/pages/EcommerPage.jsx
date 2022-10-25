@@ -4,7 +4,7 @@ import { LayoutEcommerce } from "../layout/LayoutEcommerce";
 export const EcommerPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target.search);
+    console.log(e.target.search)
   };
 
   return (

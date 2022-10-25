@@ -114,6 +114,7 @@ export const updateProductCart = async (id, data) => {
       }
     );
     const json = await response.json();
+    console.log(json);
     return json;
   } catch (err) {
     return {
@@ -175,8 +176,29 @@ export const paymentCart = async (idUser) => {
       }
     );
     return await response.json();
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    return {
+      ok: false,
+    };
+  }
+};
+
+export const buy = async (id, data) => {
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_ECOMMERCE}/api/ventas/${id}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
+    const json = await response.json();
+    console.log(json);
+    return json;
+  } catch (err) {
     return {
       ok: false,
     };
