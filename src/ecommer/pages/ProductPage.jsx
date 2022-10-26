@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { formatMoney } from "../helpers/fomartMoney";
 import { LayoutEcommerce } from "../layout/LayoutEcommerce";
-import { Button } from "../../auth/components/Button";
 import { capitalize } from "../helpers/capitalize";
 import { useEffect, useRef, useState } from "react";
 import { getProduct, setProductCart } from "../helpers/helpersEcommerce";
@@ -40,7 +39,7 @@ export const ProductPage = () => {
 
     const quantity = Number(selectRef.current.value);
     dispatch(startSaving());
-    
+
     const res = await setProductCart({
       idProductos: id,
       idUsuario: idUsuario,
@@ -51,8 +50,9 @@ export const ProductPage = () => {
       dispatch(finishSaving());
       return toast.error(res?.message || "Hubo un error")
     }
-    toast.success(res.message);
     dispatch(finishSaving());
+    toast.success(res.message);
+
   };
 
   useEffect(() => {
