@@ -6,7 +6,7 @@ import { AuthLayout } from "../Layout/AuthLayout";
 import {
   initalValuesRegister,
   validationSchemeRegister,
-} from "../formik/schema";
+} from "../../formik/schema";
 import { Error } from "../components/Error";
 import { useDispatch, useSelector } from "react-redux";
 import { startRegisterUser } from "../../store/auth/thunks";

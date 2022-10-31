@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Field, Form, Formik } from "formik";
-import { validationSchemeLogin, initalValuesLogin } from "../formik/schema";
+import { validationSchemeLogin, initalValuesLogin } from "../../formik/schema";
 import { AuthLayout } from "../Layout/AuthLayout";
 import { Error } from "../components/Error";
 import { Button } from "../components/Button";
@@ -27,7 +27,7 @@ export const LoginPage = () => {
         validationSchema={validationSchemeLogin}
       >
         {({ values, errors, touched }) => (
-          <Form>
+          <Form className="w-full">
             <div className="mb-4">
               <label htmlFor="email" className="block mb-2 text-slate-500">
                 Email
@@ -35,7 +35,7 @@ export const LoginPage = () => {
               <Field
                 type="text"
                 name="email"
-                autoComplete="off"
+                // autoComplete="off"
                 className={`w-full p-3 bg-gray-50 outline-none border rounded-lg transition-all ${
                   errors.email && touched.email && "border-red-500"
                 }`}
@@ -53,7 +53,7 @@ export const LoginPage = () => {
               <Field
                 type="password"
                 name="password"
-                autoComplete="off"
+                // autoComplete="off"
                 className={`w-full p-3 bg-gray-50 outline-none border rounded-lg transition-all ${
                   errors.password && touched.password && "border-red-500"
                 }`}
@@ -66,7 +66,7 @@ export const LoginPage = () => {
               {!!errorMessage && <ErrorAuth message={errorMessage} />}
             </div>
 
-            {status === "checking" ? <Spinner /> : <Button>Ingresar</Button>}
+            {status === "checking" ? <Spinner /> : <Button className="w-full">Ingresar</Button>}
 
             <div className="flex justify-between mt-7">
               <p className="text-slate-500">¿Aún no tienes cuenta?</p>

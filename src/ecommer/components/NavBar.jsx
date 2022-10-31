@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Options } from "./Options";
 
 export const NavBar = () => {
-  const { status,id } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { status } = useSelector((state) => state.auth);
   const [showOptions, setShowOptions] = useState(false);
   const { nombre } = useSelector((state) => state.auth);
 
-  const navigate = useNavigate();
 
   const handleChangeOptions = () => {
     setShowOptions(!showOptions);

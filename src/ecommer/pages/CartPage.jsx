@@ -33,7 +33,7 @@ export const CartPage = () => {
   if(isLoading) {
     return (
       <LayoutEcommerce>
-        <Spinner />
+          <Spinner />
       </LayoutEcommerce>
     )
   }

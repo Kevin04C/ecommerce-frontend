@@ -2,7 +2,7 @@ import { Form, Formik } from "formik";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../../auth/components/Button";
-import { validationSchemeUpdateProfile } from "../../auth/formik/schema";
+import { validationSchemeUpdateProfile } from "../../formik/schema";
 import { StartUpdateUser } from "../../store/auth/thunks";
 import { InputForm } from "../components/InputForm";
 import { LayoutEcommerce } from "../layout/LayoutEcommerce";

@@ -15,6 +15,7 @@ export const ecommerceSlice = createSlice({
     startSaving: (state) => {
       state.isSaving = true;
     },
+
     startLoading: (state) => {
       state.isLoading = true;
     },
@@ -51,21 +52,25 @@ export const ecommerceSlice = createSlice({
     },
     finishSaving: (state) => {
       state.isSaving = false;
-    }
+    },
+    finishLoading: (state) => {
+      state.isLoading = false;
+    },
   },
 });
 
 export const {
-  startSaving,
-  startLoading,
-  setErrorMessage,
-  setProdroducts,
-  setCart,
   addProduct,
   clearCart,
-  incrementProduct,
   decrementProduct,
   deleteProduct,
+  finishLoading,
+  finishSaving,
+  incrementProduct,
   incrementProductByQuantity,
-  finishSaving
+  setCart,
+  setErrorMessage,
+  setProdroducts,
+  startLoading,
+  startSaving,
 } = ecommerceSlice.actions;

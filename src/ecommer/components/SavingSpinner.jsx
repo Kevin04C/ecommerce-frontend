@@ -1,4 +1,4 @@
-import "../style/SavingSpinner.css"
+import "../css/SavingSpinner.css"
 
 export const SavingSpinner = () => {
   return (

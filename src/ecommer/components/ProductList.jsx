@@ -1,20 +1,28 @@
-import React from "react";
 import { useSelector } from "react-redux";
+import { Spinner } from "../../auth/components/Spinner";
 import { Product } from "./Product";
-import { Spinner } from '../../auth/components/Spinner';
 
-export const ProductList = () => {
-  const { isLoading, products = [] } = useSelector((state) => state.ecommerce);
+export const ProductList = ({ products }) => {
+  const { isLoading } = useSelector((state) => state.ecommerce);
+
+  if (isLoading) {
+    return (
+      <div className="mx-auto text-center">
+        <Spinner />
+        <p className="text-sm font-semibold text-slate-900">
+          Espera un momento
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="pb-12">
-      <h2 className="text-2xl md:text-4xl font-bold mb-6 md:mb-12 text-gray-800">
-        Todos nuestros <span className="text-red-500">LICORES</span> disponibles
-      </h2>
-
-      {isLoading ? (
+      {products.length <= 0 ? (
         <div>
-          <Spinner />
-          <p className="text-center font-bold text-sm text-slate-600">Un momento, estamos cargando los productos</p>
+          <p className="text-2xl font-semibold text-slate-900">
+            No se encontraron productos
+          </p>
         </div>
       ) : (
         <section className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">

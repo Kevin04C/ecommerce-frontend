@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { generateNewToken } from "../auth/helpers";
 import { AuthRouter } from "../auth/router/AuthRouter";
+import { SearchPage } from "../ecommer/components/SearchPage";
 import { EcommerPage } from "../ecommer/pages/EcommerPage";
 import { ProductPage } from "../ecommer/pages/ProductPage";
 import { SuccessPage } from "../ecommer/pages/SuccessPage";
@@ -49,6 +50,7 @@ export const AppRouter = () => {
         <Route path="/" element={<EcommerPage />} />
         <Route path="/product/:id" element={<ProductPage />} />
         <Route path="/success" element={<SuccessPage />} />
+        <Route path="/search" element={<SearchPage />} />
 
         <Route path="/*" element={<Navigate to="auth/login" />} />
       </Routes>

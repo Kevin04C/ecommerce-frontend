@@ -24,6 +24,7 @@ export const ProductPage = () => {
     imagenProducto,
     nombreCategoria,
     nombreMarca,
+    stock,
   } = data || {};
 
   const dispatch = useDispatch();
@@ -35,7 +36,7 @@ export const ProductPage = () => {
 
   const haldleAddCart = async (e) => {
     e.preventDefault();
-    if(!idUsuario) return navigate("/auth/login");
+    if (!idUsuario) return navigate("/auth/login");
 
     const quantity = Number(selectRef.current.value);
     dispatch(startSaving());
@@ -45,14 +46,13 @@ export const ProductPage = () => {
       idUsuario: idUsuario,
       cantidadCarrito: quantity,
     });
-    
-    if(!res.ok) {
+
+    if (!res.ok) {
       dispatch(finishSaving());
-      return toast.error(res?.message || "Hubo un error")
+      return toast.error(res?.message || "Hubo un error");
     }
     dispatch(finishSaving());
     toast.success(res.message);
-
   };
 
   useEffect(() => {
@@ -112,7 +112,10 @@ export const ProductPage = () => {
             <p className="text-slate-600 text-lg mb-5">
               {capitalize(descripcion)}
             </p>
-
+            <span className="text-slate-500 text-xl block mb-3">
+              <b className="font-black">Disponibles: </b>
+              {stock}
+            </span>
             <div className="flex items-start gap-10">
               <p className="font-black text-slate-800 text-3xl">
                 Precio:
@@ -139,17 +142,15 @@ export const ProductPage = () => {
             </div>
 
             <form className="mt-5" onClick={haldleAddCart}>
-               <button 
+              <button
                 type="submit"
-                className={`bg-blue-500 rounded text-white px-5 py-2 shadow-sm font-bold w-2/4 mx-auto mt-2 ${isSaving && 'grayscale'} `}
-                disabled={isSaving}
+                className={`bg-blue-500 rounded text-white px-5 py-2 shadow-sm font-bold w-full mt-2 hover:bg-blue-700 transition ${
+                  isSaving && "grayscale"
+                } ${stock <= 0 ? 'grayscale cursor-no-drop' : 'cursor-pointer'}`}
+                disabled={isSaving || stock <= 0}
               >
-                {
-                  isSaving 
-                  ? <SavingSpinner />
-                  : "Agregar al carrito"
-                }
-               </button>
+                {isSaving ? <SavingSpinner /> : "Agregar al carrito"}
+              </button>
             </form>
           </div>
         </section>

@@ -196,11 +196,44 @@ export const buy = async (id, data) => {
       }
     );
     const json = await response.json();
-    console.log(json);
     return json;
   } catch (err) {
     return {
       ok: false,
     };
+  }
+};
+
+export const searchProductBD = async (query) => {
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_ECOMMERCE}/api/ecommerce/search/${query}`,
+      {
+        headers: {
+          "Content-type": "application/json",
+        },
+      }
+    );
+
+    const json = await response.json();
+    return json;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const getOrders = async (id) => {
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_ECOMMERCE}/api/ordersHistory/${id}`,
+      {
+        headers: {
+          "Content-type": "application/json",
+        },
+      }
+    );
+    return await response.json();
+  } catch (err) {
+    return { ok: false };
   }
 };
