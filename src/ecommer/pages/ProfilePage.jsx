@@ -122,7 +122,7 @@ export const ProfilePage = () => {
                           CAMBIAR FOTO
                         </button>
                         <span className="text-red-400 font-medium text-xs">
-                          *La imágene no deben pasar de los 2MB*
+                          *La imágen no deben superar los 2MB*
                         </span>
                       </div>
                     )}
