@@ -94,7 +94,7 @@ export const ProfilePage = () => {
                     />
                     {updatingPhoto && (
                       <span className="text-slate-500 font-medium">
-                        Subiendo imagen...
+                        Subiendo imágen...
                       </span>
                     )}
 
