@@ -53,24 +53,24 @@ export const loginUser = async (data) => {
   }
 };
 
-export const updateUser = async (data, idUser) => {
+export const updateUser = async (data, idUser, token) => {
   try {
     const result = await fetch(
-      `${import.meta.env.VITE_API_ECOMMERCE}/api/auth/actualizarUsuario/${idUser}`,
+      `${
+        import.meta.env.VITE_API_ECOMMERCE
+      }/api/auth/actualizarUsuario/${idUser}`,
       {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          "x-token": token
         },
         body: JSON.stringify(data),
       }
     );
     const dataUser = await result.json();
 
-    return {
-      ok: true,
-      ...dataUser,
-    };
+    return dataUser;
   } catch (err) {
     throw {
       ok: false,
@@ -101,6 +101,6 @@ export const generateNewToken = async (token) => {
     return {
       ok: false,
       ...error,
-    };
+    }
   }
 };

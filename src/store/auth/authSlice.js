@@ -16,9 +16,10 @@ export const authSlice = createSlice({
     contacto2: null,
     telefono: null,
     idRol: null,
-    "secure_url": null,
-    
+    secure_url: null,
 
+    updatingPhoto: false,
+    errorUpdatePhoto: null,
     errorMessage: null,
   },
   reducers: {
@@ -31,7 +32,7 @@ export const authSlice = createSlice({
       state.email = payload.email;
       state.apellidoPaterno = payload.apellidoPaterno;
       state.apellidoMaterno = payload.apellidoMaterno;
-      state.direccion = payload.direcion || null;
+      state.direccion = payload.direccion || null;
       state.contacto1 = payload.contacto1;
       state.contacto2 = payload.contacto2 || null;
       state.telefono = payload.telefono || null;
@@ -58,19 +59,45 @@ export const authSlice = createSlice({
       state.idRol = null;
       state.secure_url = null;
       state.errorMessage = payload?.message || null;
+
+      state.updatingPhoto =  false;
+      state.errorUpdatePhoto =  null;
     },
     updateDataUser: (state, { payload }) => {
       state.nombre = payload.nombre;
       state.fechaNacimiento = payload.fechaNacimiento || null;
       state.apellidoPaterno = payload.apellidoPaterno;
       state.apellidoMaterno = payload.apellidoMaterno;
-      state.direccion = payload.direcion || null;
+      state.direccion = payload.direccion || null;
       state.contacto1 = payload.contacto1;
       state.contacto2 = payload.contacto2 || null;
       state.telefono = payload.telefono || null;
-      state.secure_url = payload.secure_url;
+    },
+    updadingPhotoUser: (state) => {
+      state.updatingPhoto = true;
+    },
+
+    updatePhotoUser: (state, { payload }) => {
+      state.secure_url = payload;
+      state.updatingPhoto = false;
+    },
+    setErrorUpdatePhoto: (state, { payload }) => {
+      state.updatingPhoto = false;
+      state.errorUpdatePhoto = payload;
+    },
+    clearErrorUpdatePhoto: (state) => {
+      state.errorUpdatePhoto = null;
     },
   },
 });
 
-export const { login, checkingCreditionals, logout, updateDataUser } = authSlice.actions;
+export const {
+  login,
+  checkingCreditionals,
+  logout,
+  updateDataUser,
+  updatePhotoUser,
+  updadingPhotoUser,
+  setErrorUpdatePhoto,
+  clearErrorUpdatePhoto,
+} = authSlice.actions;

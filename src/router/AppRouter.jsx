@@ -31,6 +31,7 @@ export const AppRouter = () => {
 
       dispatch(login(result));
       localStorage.setItem("token", result.token);
+      console.log(result);
     };
 
     checkAuthToken();

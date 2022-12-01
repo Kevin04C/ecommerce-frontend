@@ -43,7 +43,7 @@ export const NavBar = () => {
                   <i className="fa-solid fa-cart-shopping mr-3"></i>
                   Mi carrito
                 </p>
-                <p
+                <div
                   className="text-gray-600 md:text-lg hover:text-black cursor-pointer transition-colors flex items-center gap-2"
                   onClick={handleChangeOptions}
                 >
@@ -55,7 +55,7 @@ export const NavBar = () => {
                     />
                   </figure>
                   {nombre}
-                </p>
+                </div>
                 {showOptions && <Options />}
               </>
             ) : (
