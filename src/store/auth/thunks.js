@@ -18,6 +18,7 @@ export const startLoginUser = (data) => {
     dispatch(checkingCreditionals());
 
     const result = await loginUser(data);
+    console.log(result);
 
     if (!result.ok) return dispatch(logout(result));
 

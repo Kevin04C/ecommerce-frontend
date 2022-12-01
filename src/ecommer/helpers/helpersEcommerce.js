@@ -52,7 +52,6 @@ export const setProductCart = async (data) => {
     );
 
     const json = await response.json();
-    console.log(json);
     return json;
   } catch (err) {
     const message = err.message;

@@ -16,7 +16,8 @@ export const authSlice = createSlice({
     contacto2: null,
     telefono: null,
     idRol: null,
-    foto: null,
+    "secure_url": null,
+    
 
     errorMessage: null,
   },
@@ -35,8 +36,8 @@ export const authSlice = createSlice({
       state.contacto2 = payload.contacto2 || null;
       state.telefono = payload.telefono || null;
       state.idRol = payload.idRol;
-      state.foto = payload.foto || null;
       state.errorMessage = null;
+      state.secure_url = payload.secure_url;
     },
     checkingCreditionals: (state) => {
       state.status = "checking";
@@ -55,7 +56,7 @@ export const authSlice = createSlice({
       state.contacto2 = null;
       state.telefono = null;
       state.idRol = null;
-      state.foto = null;
+      state.secure_url = null;
       state.errorMessage = payload?.message || null;
     },
     updateDataUser: (state, { payload }) => {
@@ -67,7 +68,7 @@ export const authSlice = createSlice({
       state.contacto1 = payload.contacto1;
       state.contacto2 = payload.contacto2 || null;
       state.telefono = payload.telefono || null;
-      state.foto = payload.foto || null;
+      state.secure_url = payload.secure_url;
     },
   },
 });
