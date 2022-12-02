@@ -22,36 +22,40 @@ export const SuccessPage = () => {
   const thereIsError = isError;
 
   useEffect(() => {
-    if (!id || status !== "approved" || cart.length <= 0) return;
-    const products = [];
+    if (!!id && status === "approved" && cart.length > 0) {
+      const products = [];
 
-    for (const product of cart) {
-      const data = {
-        idVenta: null,
-        cantidad: product.cantidadCarrito,
-        idProductos: product.idProductos,
-        totalDetalle: Number(product.precioUnitario),
+      for (const product of cart) {
+        const data = {
+          idVenta: null,
+          cantidad: product.cantidadCarrito,
+          idProductos: product.idProductos,
+          totalDetalle: Number(product.precioUnitario),
+        };
+        products.push(data);
+      }
+      const generatePucharse = async () => {
+        const res = await buy(id, {
+          products,
+          totalVenta: generateTotal(cart),
+        });
+        setCompleteOrder({ isError: false, isLoading: false });
+        if (!res.ok)
+          return setCompleteOrder({ isError: true, isLoading: false });
+        deleteCart(id);
       };
-      products.push(data);
+      generatePucharse();
     }
-    const generatePucharse = async () => {
-      const res = await buy(id, { products, totalVenta: generateTotal(cart) });
-      setCompleteOrder({ isError: false, isLoading: false });
-      if (!res.ok) return setCompleteOrder({ isError: true, isLoading: false });
-      deleteCart(id);
-    };
-    generatePucharse();
-  }, [id]);
+  }, [id, cart]);
 
   if (status === "approved") {
     return (
       <LayoutEcommerce>
-       
-        { isLoading 
-        ? <Spinner /> 
-        :
-          <section className='text-center md:w-2/4 mx-auto my-10'>
-            <div className={`${!thereIsError ? '' : 'hidden'}`}>
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <section className="text-center md:w-2/4 mx-auto my-10">
+            <div className={`${!thereIsError ? "" : "hidden"}`}>
               <i className="fa-solid fa-check text-green-500 text-6xl md:text-8xl"></i>
               <h1 className="text-4xl md:text-7xl text-slate-900 font-bold mb-7">
                 Gracias por tu compra
@@ -62,13 +66,15 @@ export const SuccessPage = () => {
               </p>
             </div>
 
-            <h1 className={`font-bold text-center text-4xl text-red-500 ${thereIsError ? '' : 'hidden'}`}>
-              Ups, hubo un error en la  compra
+            <h1
+              className={`font-bold text-center text-4xl text-red-500 ${
+                thereIsError ? "" : "hidden"
+              }`}
+            >
+              Ups, hubo un error en la compra
             </h1>
-        
           </section>
-        
-        }
+        )}
       </LayoutEcommerce>
     );
   }
